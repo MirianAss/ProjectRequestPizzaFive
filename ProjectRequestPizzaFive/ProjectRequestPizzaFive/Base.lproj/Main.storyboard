@@ -56,17 +56,32 @@
             </objects>
             <point key="canvasLocation" x="689" y="4"/>
         </scene>
-        <!--View Controller-->
+        <!--Table View Pizza View Controller-->
         <scene sceneID="cGO-XJ-hSn">
             <objects>
-                <viewController id="eKy-YM-7DI" sceneMemberID="viewController">
+                <viewController id="eKy-YM-7DI" customClass="TableViewPizzaViewController" customModule="ProjectRequestPizzaFive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lpU-jl-Fji">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RNr-W0-LV3">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="b4U-P6-QUI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RNr-W0-LV3" firstAttribute="top" secondItem="b4U-P6-QUI" secondAttribute="top" id="9I3-lM-1EZ"/>
+                            <constraint firstItem="b4U-P6-QUI" firstAttribute="trailing" secondItem="RNr-W0-LV3" secondAttribute="trailing" id="CQ1-4s-HPD"/>
+                            <constraint firstItem="RNr-W0-LV3" firstAttribute="leading" secondItem="b4U-P6-QUI" secondAttribute="leading" id="byO-KG-ZbB"/>
+                            <constraint firstItem="b4U-P6-QUI" firstAttribute="bottom" secondItem="RNr-W0-LV3" secondAttribute="bottom" id="leN-1R-1vd"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="If4-cn-tkc"/>
+                    <connections>
+                        <outlet property="tableView" destination="RNr-W0-LV3" id="yOS-rx-Ulv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ODu-wa-DpW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

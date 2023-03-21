@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ScreenRatingViewController: UIViewController {
 
@@ -18,12 +19,22 @@ class ScreenRatingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        lblNamePizza.text = screenRating?.name ?? ""
+        let urlImage = URL(string: screenRating?.imageURL ?? "")
+        imagePizza.sd_setImage(with: urlImage)
+        lblRating.text = "Segundo nossos clientes, a pizza \(screenRating?.name ?? "") está na posição - \(screenRating?.rating ?? 0)/5 - de aprovação"
     }
 
     @IBAction func btAdvance(_ sender: Any) {
+        if let screen = storyboard?.instantiateViewController(withIdentifier: "value") as? screenValueViewController {
+            
+            screen.screenValue = screenRating.self
+            
+            self.navigationController?.pushViewController(screen, animated: true)
+        }
     }
     
     @IBAction func btBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

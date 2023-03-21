@@ -6,25 +6,46 @@
 //
 
 import UIKit
+import Alamofire
 
 class TableViewPizzaViewController: UIViewController {
+    
+    var arrayPizza: Pizza?
+    
+    func requestPizza() {
+        AF.request("https://p3teufi0k9.execute-api.us-east-1.amazonaws.com/v1/pizza").response {response in
+            
+            let pizza = try? JSONDecoder().decode(Pizza.self, from: response.data ?? Data())
+            self.arrayPizza = pizza
+            self.tableView.reloadData()
+            
+        }
+    }
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        requestPizza()
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "PizzaTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+extension TableViewPizzaViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.arrayPizza?.count ?? 0
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? PizzaTableViewCell {
+            
+            cell.setupPizza(pizza: arrayPizza?[indexPath.row])
+            
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    
 }
